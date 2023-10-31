@@ -12,11 +12,11 @@ const setupBot = () => {
     next();
   });
 
-  bot.on("message", (ctx) => {
-    if (ctx.message.text === "1") {
-      ctx.reply("Можна декілька разів робити bot.on якщо викликати next");
-    }
-  });
+  // bot.on("message", (ctx) => {
+  //   if (ctx.message.text === "1") {
+  //     ctx.reply("Можна декілька разів робити bot.on якщо викликати next");
+  //   }
+  // });
 
   bot.hears('привет', (ctx) => ctx.reply('та написав привет'))
   bot.hears('1', (ctx) => ctx.reply('та написав один'))
