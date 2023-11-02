@@ -1,5 +1,5 @@
 const { Telegraf } = require("telegraf");
-const { getMainMenu } = require("./keyboards");
+const { getMainMenu, yesNoKeyboard } = require("./keyboards");
 
 require("dotenv").config();
 
