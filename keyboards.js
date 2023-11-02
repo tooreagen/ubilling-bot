@@ -6,7 +6,7 @@ const getMainMenu = () => {
 
 const yesNoKeyboard = () => {
   return Markup.inlineKeyboard(
-    [Markup.callbackButton("Да", "yes"), Markup.callbackButton("Нет", "no")],
+    [Markup.inlineKeyboard("Да", "yes"), Markup.inlineKeyboard("Нет", "no")],
     { columns: 2 }
   ).extra();
 };
