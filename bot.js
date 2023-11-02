@@ -21,7 +21,10 @@ const setupBot = () => {
   bot.hears("Карпати!", (ctx) => {
     console.log("Карпати по повній");
     ctx.replyWithPhoto(
-      "https://koruna.ua/ua/wp-content/uploads/sites/2/2021/04/Karpaty-vpervye-1024x683.jpg"
+      "https://koruna.ua/ua/wp-content/uploads/sites/2/2021/04/Karpaty-vpervye-1024x683.jpg",
+      {
+        caption: "Ди як файно!",
+      }
     );
   });
 
