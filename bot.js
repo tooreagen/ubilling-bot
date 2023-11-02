@@ -1,10 +1,11 @@
-const { Telegraf, Markup } = require("telegraf");
+import { Telegraf } from "telegraf";
+import { getMainMenu } from "./keyboards";
 require("dotenv").config();
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 const setupBot = () => {
-  bot.start((ctx) => ctx.reply("Стартує? Стартує!!!!"));
+  bot.start((ctx) => ctx.reply("Вітаю!",getMainMenu()));
 
   // bot.on("message", async (ctx, next) => {
   //   const chatID = ctx.chat.id;
@@ -55,28 +56,28 @@ const setupBot = () => {
   //   );
   // });
 
-  bot.command("dynamic-buttons", (ctx) => {
-    return ctx.reply(
-      "Dynamic buttons example.",
-      Markup.inlineKeyboard([
-        Markup.callbackButton("Option 1", "option1"),
-        Markup.callbackButton("Option 2", "option2"),
-        Markup.callbackButton("Option 3", "option3"),
-      ]).extra()
-    );
-  });
+  // bot.command("dynamic-buttons", (ctx) => {
+  //   return ctx.reply(
+  //     "Dynamic buttons example.",
+  //     Markup.inlineKeyboard([
+  //       Markup.callbackButton("Option 1", "option1"),
+  //       Markup.callbackButton("Option 2", "option2"),
+  //       Markup.callbackButton("Option 3", "option3"),
+  //     ]).extra()
+  //   );
+  // });
 
-  bot.action("option1", (ctx) => {
-    return ctx.answerCbQuery("Option 1 selected!");
-  });
+  // bot.action("option1", (ctx) => {
+  //   return ctx.answerCbQuery("Option 1 selected!");
+  // });
 
-  bot.action("option2", (ctx) => {
-    return ctx.answerCbQuery("Option 2 selected!");
-  });
+  // bot.action("option2", (ctx) => {
+  //   return ctx.answerCbQuery("Option 2 selected!");
+  // });
 
-  bot.action("option3", (ctx) => {
-    return ctx.answerCbQuery("Option 3 selected!");
-  });
+  // bot.action("option3", (ctx) => {
+  //   return ctx.answerCbQuery("Option 3 selected!");
+  // });
 
   return bot;
 };
@@ -85,7 +86,7 @@ const setupBot = () => {
 process.once("SIGINT", () => bot.stop("SIGINT"));
 process.once("SIGTERM", () => bot.stop("SIGTERM"));
 
-module.exports = { setupBot };
+export default { setupBot };
 
 //bot.on("message") — он запускается каждый раз, когда кто-то отправляет сообщение.
 
@@ -140,3 +141,7 @@ module.exports = { setupBot };
 // //bot.on("message") — он запускается каждый раз, когда кто-то отправляет сообщение.
 // //Через ctx.reply мы отвечаем в тот же чат, а через ctx.telegram.sendMessage(chat_id, `Hello`) можно отправить сообщение в произвольный чат.
 // //hears — регистрирует middleware, которые реагируют на текстовые сообщения указанного содержания
+
+
+
+//git add . && git commit -m "education" && git push
