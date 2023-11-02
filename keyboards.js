@@ -1,8 +1,14 @@
 const { Markup } = require("telegraf");
 
 const getMainMenu = () => {
-  console.log("Keyboard");
   return Markup.keyboard([["Мої задачі", "Додати задачу"], ["Карпати!"]]).resize();
 };
 
-module.exports = { getMainMenu };
+const yesNoKeyboard = () => {
+  return Markup.inlineKeyboard(
+    [Markup.callbackButton("Да", "yes"), Markup.callbackButton("Нет", "no")],
+    { columns: 2 }
+  ).extra();
+};
+
+module.exports = { getMainMenu, yesNoKeyboard };
