@@ -36,7 +36,7 @@ const setupBot = () => {
     console.log(ctx);
       ctx.replyWithHTML(
           `Вы действительно хотите добавить задачу:\n\n`+
-          // `<i>${ctx.message.text}</i>`,
+          `<i>${ctx.update.message.text}</i>`,
           yesNoKeyboard()
       )
   })
