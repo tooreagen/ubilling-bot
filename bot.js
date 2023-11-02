@@ -4,7 +4,7 @@ require("dotenv").config();
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 const setupBot = () => {
-  // bot.start((ctx) => ctx.reply("Вітаю!"));
+  bot.start((ctx) => ctx.reply("Стартує? Стартує!!!!"));
 
   // bot.on("message", async (ctx, next) => {
   //   const chatID = ctx.chat.id;
