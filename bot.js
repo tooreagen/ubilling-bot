@@ -33,7 +33,6 @@ const setupBot = () => {
   });
 
   bot.on('text', ctx => {
-    console.log(ctx);
       ctx.replyWithHTML(
           `Вы действительно хотите добавить задачу:\n\n`+
           `<i>${ctx.update.message.text}</i>`,
