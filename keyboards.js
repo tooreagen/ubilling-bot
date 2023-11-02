@@ -1,8 +1,8 @@
-import Markup from "telegraf/markup.js";
+const { Markup } = require("telegraf");
 
-export function getMainMenu() {
+const getMainMenu = () => {
   console.log("Keyboard");
-  return Markup.keyboard([["Мои задачи", "Добавить задачу"], ["Смотивируй меня"]])
-    .resize()
-    .extra();
-}
+  return Markup.keyboard([["Мои задачи", "Добавить задачу"], ["Смотивируй меня"]]).resize();
+};
+
+module.exports = { getMainMenu };
