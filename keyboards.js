@@ -2,7 +2,7 @@ const { Markup } = require("telegraf");
 
 const getMainMenu = () => {
   console.log("Keyboard");
-  return Markup.keyboard([["Мои задачи", "Добавить задачу"], ["Смотивируй меня"]]).resize();
+  return Markup.keyboard([["Мої задачі", "Додати задачу"], ["Карпати!"]]).resize();
 };
 
 module.exports = { getMainMenu };
