@@ -8,7 +8,7 @@ const yesNoKeyboard = () => {
   return Markup.inlineKeyboard(
     [Markup.inlineKeyboard("Да", "yes"), Markup.inlineKeyboard("Нет", "no")],
     { columns: 2 }
-  ).extra();
+  );
 };
 
 module.exports = { getMainMenu, yesNoKeyboard };
