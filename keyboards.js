@@ -6,9 +6,8 @@ const getMainMenu = () => {
 
 const yesNoKeyboard = () => {
   return Markup.inlineKeyboard(
-    [Markup.callbackButton("Да", "yes"), Markup.callbackButton("Нет", "no")],
+    [Markup.button.callback("Да", "yes"), Markup.button.callback("Нет", "no")],
     { columns: 2 }
   );
 };
-
 module.exports = { getMainMenu, yesNoKeyboard };

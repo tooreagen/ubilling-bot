@@ -1,11 +1,15 @@
 const { Telegraf } = require("telegraf");
+const LocalSession = require("telegraf-session-local");
 const { getMainMenu, yesNoKeyboard } = require("./keyboards");
+const { taskList, addTask, getMyTasks } = require("./db");
 
 require("dotenv").config();
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 const setupBot = () => {
+  bot.use(new LocalSession({ database: "example_db.json" }).middleware());
+
   //старт бота, авторизація
   //додати перевірку якщо вже авторизований, то повідомити
   bot.start((ctx) =>
@@ -15,8 +19,15 @@ const setupBot = () => {
     )
   );
 
-  bot.hears("Мої задачі", (ctx) => {
-    ctx.reply("Ти цокнув задачі");
+  bot.hears("Мої задачі", async (ctx) => {
+    const tasks = await getMyTasks();
+    let result = "";
+
+    for (let i = 0; i < tasks.length; i++) {
+      result = result + `[${i + 1}] ${tasks[i]}\n`;
+    }
+
+    ctx.replyWithHTML("<b>Список ваших задач:</b>\n\n" + `${result}`);
   });
 
   bot.hears("Додати задачу", (ctx) => {
@@ -32,13 +43,23 @@ const setupBot = () => {
     );
   });
 
-  bot.on('text', ctx => {
-      ctx.replyWithHTML(
-          `Вы действительно хотите добавить задачу:\n\n`+
-          `<i>${ctx.update.message.text}</i>`,
-          yesNoKeyboard()
-      )
-  })
+  bot.on("text", (ctx) => {
+    ctx.session.taskText = ctx.message.text;
+
+    ctx.replyWithHTML(
+      `Вы действительно хотите добавить задачу:\n\n` + `<i>${ctx.update.message.text}</i>`,
+      yesNoKeyboard()
+    );
+  });
+
+  bot.action(["yes", "no"], (ctx) => {
+    if (ctx.callbackQuery.data === "yes") {
+      addTask(ctx.session.taskText);
+      ctx.editMessageText("Ваша задача успешно добавлена");
+    } else {
+      ctx.deleteMessage();
+    }
+  });
 
   return bot;
 };
