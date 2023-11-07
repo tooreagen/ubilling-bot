@@ -2,6 +2,7 @@ const { Telegraf } = require("telegraf");
 const LocalSession = require("telegraf-session-local");
 const { getMainMenu, yesNoKeyboard } = require("./keyboards");
 const { taskList, addTask, getMyTasks } = require("./db");
+const { connectionUbilling } = require(".");
 
 require("dotenv").config();
 
@@ -34,13 +35,18 @@ const setupBot = () => {
     ctx.reply("Ти цокнув додати задачу");
   });
 
-  bot.hears("Карпати!", (ctx) => {
-    ctx.replyWithPhoto(
-      "https://koruna.ua/ua/wp-content/uploads/sites/2/2021/04/Karpaty-vpervye-1024x683.jpg",
-      {
-        caption: "Ди як файно!",
+  bot.hears("Авторизація", (ctx) => {
+    console.log("Запит до БД");
+    const sqlQuery = `SELECT login FROM users WHERE login=vynny1ap64_h7n2`;
+
+    connectionUbilling.query(sqlQuery, (err, result) => {
+      if (err) {
+        console.error(err);
+        return;
       }
-    );
+
+      console.log(result);
+    });
   });
 
   bot.on("text", (ctx) => {
