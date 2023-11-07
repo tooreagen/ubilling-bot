@@ -1,7 +1,10 @@
 const { Markup } = require("telegraf");
 
 const getMainMenu = () => {
-  return Markup.keyboard([["Мої задачі", "Додати задачу"], ["Авторизація"]]).resize();
+  return Markup.keyboard([
+    ["Авторизація"],
+    ["Мої задачі", "Додати задачу"],
+  ]).resize();
 };
 
 const yesNoKeyboard = () => {

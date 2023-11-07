@@ -48,29 +48,6 @@
   //   );
   // });
 
-  // bot.command("dynamic-buttons", (ctx) => {
-  //   return ctx.reply(
-  //     "Dynamic buttons example.",
-  //     Markup.inlineKeyboard([
-  //       Markup.callbackButton("Option 1", "option1"),
-  //       Markup.callbackButton("Option 2", "option2"),
-  //       Markup.callbackButton("Option 3", "option3"),
-  //     ]).extra()
-  //   );
-  // });
-
-  // bot.action("option1", (ctx) => {
-  //   return ctx.answerCbQuery("Option 1 selected!");
-  // });
-
-  // bot.action("option2", (ctx) => {
-  //   return ctx.answerCbQuery("Option 2 selected!");
-  // });
-
-  // bot.action("option3", (ctx) => {
-  //   return ctx.answerCbQuery("Option 3 selected!");
-  // });
-
 
 
 
