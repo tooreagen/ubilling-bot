@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --ignore example_db.json index.js",
+    "dev": "nodemon --ignore user_db.json index.js",
     "start": "node --trace-warnings index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

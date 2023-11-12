@@ -1,3 +1,37 @@
+1. Нужно учесть что у одного логина может быть разные учетные записи
+в телеге, юзер может сменить номер и телегу. Т.е. у логин 
+может смениться чат айди
+
+
+2. Разобраться с 
+Для достижения вашей цели, вам нужно использовать операцию REPLACE INTO вместо INSERT INTO. Операция REPLACE INTO вставляет новую запись, если уникальный ключ не существует, и обновляет существующую запись, если уникальный ключ уже существует.
+Вот пример запроса:
+sql
+
+Copy
+
+REPLACE INTO tg_bot (id, login, chat_id, authorized)
+VALUES (1, 'vynny1ap64_h7n2', 676900138, 1);
+В этом примере, если запись с id равным 1 уже существует, то поля login, chat_id и authorized будут обновлены новыми значениями. Если же записи с id равным 1 нет, то будет выполнена вставка новой записи с указанными значениями.
+Обратите внимание, что вам нужно заменить tg_bot на имя вашей таблицы в запросе.
+
+3. Логотип перед стартом бота и потом в приветствии
+
+
+vynny1ap64_h7n2
+ydbhix3h
+
+
+
+
+
+
+
+
+
+
+
+
 
   // bot.on("message", async (ctx, next) => {
   //   const chatID = ctx.chat.id;
@@ -26,86 +60,26 @@
   //   );
   // });
 
-  // const getRandomNumber = () => getRandomInt(0, 3);
-
-  // const numberInlineKeyboard = Markup.inlineKeyboard([
-  //   Markup.button.callback("Сгенерировать новое  инлайн", "random_number"),
-  // ]);
-
-  // bot.hears("Налаштування", (ctx) => ctx.reply(getRandomNumber().toString(), numberInlineKeyboard));
-
-  // bot.action("random_number", async (ctx) => {
-  //   await ctx.editMessageText(
-  //     `${getRandomNumber()}\nОтредактировано: ${new Date().toISOString()}`,
-  //     numberInlineKeyboard
-  //   );
-  // });
-
-  // bot.use(async (ctx) => {
-  //   await ctx.reply(
-  //     "Что нужно сделать?",
-  //     Markup.keyboard([["Авторизація", "Налаштування"]]).resize()
-  //   );
-  // });
-
-
-
-
-
-
-
-
-
-
-
 
   
 //bot.on("message") — он запускается каждый раз, когда кто-то отправляет сообщение.
 
-// const setupBot = () => {
 
-//   //   bot.command("help", (ctx) => {
-//   //     ctx.reply("Ви запросили допомогу! Я вам допоможу. ");
-//   //   });
+// //hears — регистрирует middleware, которые реагируют на текстовые сообщения указанного содержания
+  // bot.hears("Авторизація", (ctx) => {
+  //   ctx.reply("Введіть логін:");
+  // });
 
-//   //   bot.command("settings", (ctx) => {
-//   //     ctx.reply("Ви запросили налаштування. ");
-//   //   });
 
-//   const getCoinSide = () => (getRandomInt(0, 1) === 0 ? "Орёл" : "Решка");
-//   const coinInlineKeyboard = Markup.inlineKeyboard([
-//     Markup.button.callback("Подбросить ещё раз", "flip_a_coin"),
-//     Markup.button.callback("Еще кнлпочка", "1"),
-//   ]);
-//   bot.hears("Подбросить монетку", (ctx) => ctx.reply(getCoinSide(), coinInlineKeyboard));
-//   //Подбросить ещё раз
-//   bot.action("flip_a_coin", async (ctx) => {
-//     await ctx.editMessageText(
-//       `${getCoinSide()}\nОтредактировано: ${new Date().toISOString()}`,
-//       coinInlineKeyboard
-//     );
-//   });
+    // bot.action(["yes", "no"], (ctx) => {
+  //   if (ctx.callbackQuery.data === "yes") {
+  //     addTask(ctx.session.taskText);
+  //     ctx.editMessageText("Ваша задача успешно добавлена");
+  //   } else {
+  //     ctx.deleteMessage();
+  //   }
+  // });
 
-//   const getRandomNumber = () => getRandomInt(0, 3);
-//   const numberInlineKeyboard = Markup.inlineKeyboard([
-//     Markup.button.callback("Сгенерировать новое  инлайн", "random_number"),
-//   ]);
-//   bot.hears("Случайное число", (ctx) =>
-//     ctx.reply(getRandomNumber().toString(), numberInlineKeyboard)
-//   );
-//   bot.action("random_number", async (ctx) => {
-//     await ctx.editMessageText(
-//       `${getRandomNumber()}\nОтредактировано: ${new Date().toISOString()}`,
-//       numberInlineKeyboard
-//     );
-//   });
+  // //Через ctx.reply мы отвечаем в тот же чат, а через ctx.telegram.sendMessage(chat_id, `Hello`) можно отправить сообщение в произвольный чат.
 
-//   bot.use(async (ctx) => {
-//     await ctx.reply(
-//       "Что нужно сделать?",
-//       Markup.keyboard([["Подбросить монетку", "Случайное число"]]).resize()
-//     );
-//   });
-
-//   return bot;
-// };
+//git add . && git commit -m "add authentification (login)" && git push

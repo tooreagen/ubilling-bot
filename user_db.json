@@ -1,0 +1,26 @@
+{
+  "sessions": [
+    {
+      "id": "676900138:676900138",
+      "data": {
+        "__scenes": {
+          "current": "billingScene",
+          "state": {}
+        },
+        "name": "654654",
+        "age": "66",
+        "login": "vynny1ap64_h7n2",
+        "password": "aaaa",
+        "isAuth": true
+      }
+    },
+    {
+      "id": "824411921:824411921",
+      "data": {
+        "__scenes": {},
+        "login": "vynny1ap64_h7n2",
+        "isAuth": true
+      }
+    }
+  ]
+}

@@ -1,8 +1,5 @@
 const { connectionUbilling } = require("../db");
 
-///загальна функція авторизації
-const authentification = () => {};
-
 //зчитування логіна
 const checkLogin = async (login) => {
   const sqlQuery = `SELECT login FROM users WHERE login='${login}'`;
@@ -18,16 +15,76 @@ const checkLogin = async (login) => {
       });
     });
 
-    //Якщо логін є, повертаємо його
+    //Якщо логін є, повертаємо true
     if (resultLogin.length !== 0) {
-      return resultLogin[0].login;
+      if (resultLogin[0].login === login) {
+        return true;
+      }
     }
 
-    //Інакше кажемо що логін не знайдено
-    return null;
+    //Інакше false - логін не знайдено
+    return false;
   } catch (err) {
     console.error(err);
   }
 };
 
-module.exports = { authentification, checkLogin };
+//зчитування пароля
+const checkPassword = async (login, pass) => {
+  const sqlQuery = `SELECT password FROM users WHERE login='${login}'`;
+
+  try {
+    const resultPass = await new Promise((resolve, reject) => {
+      connectionUbilling.query(sqlQuery, (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      });
+    });
+
+    //Якщо пароль вірний, повертаємо true
+    if (resultPass.length !== 0) {
+      if (resultPass[0].password === pass) {
+        return true;
+      }
+    }
+
+    //Інакше false - пароль не вірний
+    return false;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+//перевірка на старті чи авторизований юзер
+const checkAuth = async (chatId) => {
+  const sqlQuery = `SELECT authorized	FROM tg_bot WHERE chat_id='${chatId}'`;
+
+  try {
+    const resultAuth = await new Promise((resolve, reject) => {
+      connectionUbilling.query(sqlQuery, (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      });
+    });
+
+    //Якщо авторизований в БД, повертаємо true
+    if (resultAuth.length !== 0) {
+      if (resultAuth[0].authorized === 1) {
+        return true;
+      }
+    }
+
+    //Інакше false - не авторизовано
+    return false;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+module.exports = { checkLogin, checkPassword, checkAuth };
