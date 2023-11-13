@@ -15,7 +15,6 @@ const getUserBalance = async (login) => {
       });
     });
 
-    //Дадаємо в об'єкт баланс юзера
     if (resultCash.length !== 0) {
       return resultCash[0].cash;
     }

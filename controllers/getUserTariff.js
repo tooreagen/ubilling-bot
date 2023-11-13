@@ -15,7 +15,6 @@ const getUserTariff = async (login) => {
       });
     });
 
-    //Дадаємо в об'єкт тариф юзера
     if (resultTariff.length !== 0) {
       return resultTariff[0].tariff;
     }

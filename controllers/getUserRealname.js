@@ -15,7 +15,6 @@ const getUserRealname = async (login) => {
       });
     });
 
-    //Дадаємо в об'єкт ПІБ юзера
     if (resultRealname.length !== 0) {
       return resultRealname[0].realname;
     }

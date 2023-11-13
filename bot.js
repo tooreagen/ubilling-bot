@@ -1,7 +1,7 @@
-const { Telegraf, Scenes, Markup } = require("telegraf");
+const { Telegraf, Scenes } = require("telegraf");
 const LocalSession = require("telegraf-session-local");
 require("dotenv").config();
-const { notAuthKeyboard, mainKeyboard } = require("./keyboards");
+const { notAuthKeyboard } = require("./keyboards");
 const { checkAuth } = require("./controllers/authentification");
 const { authWizard } = require("./scenes/authScene");
 const { billingScene } = require("./scenes/billingScene");
@@ -11,7 +11,7 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 const setupBot = () => {
   bot.use(new LocalSession({ database: "user_db.json" }).middleware());
 
-  // Реєстрація сцени-майстра в боті
+  // Реєстрація сцен в боті
   const stage = new Scenes.Stage([authWizard, billingScene]);
   bot.use(stage.middleware());
 

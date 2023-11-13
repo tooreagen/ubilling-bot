@@ -7,7 +7,10 @@ const notAuthKeyboard = () => {
 
 //клавіатура для авторизованих юзерів
 const mainKeyboard = () => {
-  return Markup.keyboard([["Баланс"], ["Мої задачі", "Додати задачу"]]).resize();
+  return Markup.keyboard([
+    ["Баланс", "Останні платежі"],
+    ["Контакти", "Подати скаргу"],
+  ]).resize();
 };
 
 //клавіатура запитання да, ні
