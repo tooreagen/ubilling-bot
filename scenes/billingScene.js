@@ -13,6 +13,8 @@ billingScene.enter(async (ctx) => {
 
   await ctx.replyWithHTML(await getUserAllInfo(ctx.session.login));
 
+  await ctx.replyWithHTML("❗️<b>УВАГА! Функціонал працює в тестовому режимі</b>❗️");
+
   await ctx.reply("👇 Виконайте запит:", mainKeyboard());
 });
 
@@ -39,8 +41,15 @@ billingScene.hears("📈Останні платежі", async (ctx) => {
   ctx.replyWithHTML(`<b>Останні 10 платежів:</b>\n\n${paysMarkup}`);
 });
 
+//взяти кредит
+billingScene.hears("🤑Кредит", async (ctx) => {
+  login = ctx.session.login;
+  ctx.replyWithHTML(`Ви не можете взяти кредит.`);
+});
+
+
 //відображення контактів
-billingScene.hears("📋Контакти", async (ctx) => {
+billingScene.hears("📋Контакти провайдера", async (ctx) => {
   ctx.replyWithHTML(`<b>🏢 НАША АДРЕСА:</b>
 м. Калуш, вул. Б.Хмельницького, 14\n
 <b>📱 ТЕЛЕФОНИ:</b>
