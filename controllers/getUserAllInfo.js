@@ -19,7 +19,12 @@ const getUserAllInfo = async (login) => {
     console.error(error);
   }
 
-  return userData;
+  const markup =
+    `Ваше ім'я: <b>${userData.name}</b>\n` +
+    `Ваш баланс: <b>${userData.balance} грн.</b>\n` +
+    `Ваш тариф: <b>${userData.tariff}</b>\n`;
+
+  return markup;
 };
 
 module.exports = { getUserAllInfo };

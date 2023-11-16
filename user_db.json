@@ -17,9 +17,42 @@
     {
       "id": "824411921:824411921",
       "data": {
-        "__scenes": {},
+        "__scenes": {
+          "current": "billingScene",
+          "state": {}
+        },
         "login": "vynny1ap64_h7n2",
         "isAuth": true
+      }
+    },
+    {
+      "id": "305775272:305775272",
+      "data": {
+        "__scenes": {
+          "current": "billingScene",
+          "state": {}
+        },
+        "login": "66956"
+      }
+    },
+    {
+      "id": "5230163004:5230163004",
+      "data": {
+        "__scenes": {
+          "current": "billingScene",
+          "state": {}
+        },
+        "login": "66956"
+      }
+    },
+    {
+      "id": "5438686917:5438686917",
+      "data": {
+        "__scenes": {
+          "current": "billingScene",
+          "state": {}
+        },
+        "login": "konoval2ap35_jr40"
       }
     }
   ]
