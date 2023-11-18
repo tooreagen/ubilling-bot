@@ -1,5 +1,5 @@
 const { Scenes } = require("telegraf");
-const { mainKeyboard } = require("../keyboards");
+const { mainKeyboard, financeKeyboard, techKeyboard } = require("../keyboards");
 const { getUserAllInfo } = require("../controllers/getUserAllInfo");
 const { getUserBalance } = require("../controllers/getUserBalance");
 const { getUserPays } = require("../controllers/getUserPays");
@@ -16,6 +16,21 @@ billingScene.enter(async (ctx) => {
   await ctx.replyWithHTML("❗️<b>УВАГА! Функціонал працює в тестовому режимі</b>❗️");
 
   await ctx.reply("👇 Виконайте запит:", mainKeyboard());
+});
+
+//виклик головної клавіатури по команді НАЗАД
+billingScene.hears("⬅️Назад", async (ctx) => {
+  await ctx.reply("👇 Виконайте запит:", mainKeyboard());
+});
+
+//виклик фінансової клавіатури
+billingScene.hears("💲Фінансові операції", async (ctx) => {
+  await ctx.reply("👇 Виконайте запит:", financeKeyboard());
+});
+
+//виклик технічної клавіатури
+billingScene.hears("⚙️Технічні питання", async (ctx) => {
+  await ctx.reply("👇 Виконайте запит:", techKeyboard());
 });
 
 //відображення балансу
@@ -47,6 +62,10 @@ billingScene.hears("🤑Кредит", async (ctx) => {
   ctx.replyWithHTML(`Ви не можете взяти кредит.`);
 });
 
+//Виклик майстра
+billingScene.hears("🛠Виклик майстра", async (ctx) => {
+  ctx.replyWithHTML("Ку-ку", 5230163004);
+});
 
 //відображення контактів
 billingScene.hears("📋Контакти провайдера", async (ctx) => {

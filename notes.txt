@@ -82,4 +82,4 @@ ydbhix3h
 
   // //Через ctx.reply мы отвечаем в тот же чат, а через ctx.telegram.sendMessage(chat_id, `Hello`) можно отправить сообщение в произвольный чат.
 
-//git add . && git commit -m "fix bug, code refactoring" && git push
+//git add . && git commit -m "add getUserCredit, keyboard refactoring" && git push
