@@ -3,10 +3,7 @@
     {
       "id": "676900138:676900138",
       "data": {
-        "__scenes": {
-          "current": "billingScene",
-          "state": {}
-        },
+        "__scenes": {},
         "name": "654654",
         "age": "66",
         "login": "vynny1ap64_h7n2",
@@ -53,6 +50,16 @@
           "state": {}
         },
         "login": "konoval2ap35_jr40"
+      }
+    },
+    {
+      "id": "947138739:947138739",
+      "data": {
+        "__scenes": {
+          "current": "authentication",
+          "state": {},
+          "cursor": 1
+        }
       }
     }
   ]

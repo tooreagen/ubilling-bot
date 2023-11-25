@@ -87,4 +87,32 @@ const checkAuth = async (chatId) => {
   }
 };
 
-module.exports = { checkLogin, checkPassword, checkAuth };
+//вихід абонета з бота
+const userLogout = async (login, chatId) => {
+  const sqlQuery = `UPDATE tg_bot SET authorized = 0
+                    WHERE login = '${login}' AND chat_id = '${chatId}'
+`;
+
+  try {
+    const resultLogout = await new Promise((resolve, reject) => {
+      connectionUbilling.query(sqlQuery, (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      });
+    });
+
+    //Якщо запит не успішний, повідомляємо
+    if (resultLogout.affectedRows === 0) {
+      return "Помилка!"
+    }
+
+    //Якщо успішно то повідомляємо
+    return "Ви вийшли.";
+  } catch (err) {
+    console.error(err);
+  }
+};
+module.exports = { checkLogin, checkPassword, checkAuth, userLogout };

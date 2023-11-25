@@ -1,8 +1,9 @@
 const { Scenes } = require("telegraf");
-const { mainKeyboard, financeKeyboard, techKeyboard } = require("../keyboards");
+const { mainKeyboard, financeKeyboard, techKeyboard, notAuthKeyboard } = require("../keyboards");
 const { getUserAllInfo } = require("../controllers/getUserAllInfo");
 const { getUserBalance } = require("../controllers/getUserBalance");
 const { getUserPays } = require("../controllers/getUserPays");
+const { userLogout } = require("../controllers/authentification");
 
 const billingScene = new Scenes.BaseScene("billingScene");
 
@@ -35,13 +36,13 @@ billingScene.hears("⚙️Технічні питання", async (ctx) => {
 
 //відображення балансу
 billingScene.hears("💰Баланс", async (ctx) => {
-  login = ctx.session.login;
+  const login = ctx.session.login;
   ctx.replyWithHTML(`Ваш баланс: <b>${await getUserBalance(login)} грн.</b>`);
 });
 
 //відображення останніх 10 платежів
 billingScene.hears("📈Останні платежі", async (ctx) => {
-  login = ctx.session.login;
+  const login = ctx.session.login;
   const pays = await getUserPays(login);
   let paysMarkup = "";
 
@@ -58,7 +59,7 @@ billingScene.hears("📈Останні платежі", async (ctx) => {
 
 //взяти кредит
 billingScene.hears("🤑Кредит", async (ctx) => {
-  login = ctx.session.login;
+  const login = ctx.session.login;
   ctx.replyWithHTML(`Ви не можете взяти кредит.`);
 });
 
@@ -95,6 +96,13 @@ billingScene.hears("🤬Подати скаргу", async (ctx) => {
 //інформація про абонента
 billingScene.hears("🤷‍♂️Хто я?", async (ctx) => {
   await ctx.replyWithHTML(await getUserAllInfo(ctx.session.login));
+});
+
+//вихід з бота
+billingScene.hears("↩️Вихід", async (ctx) => {
+  const login = ctx.session.login;
+  const chatId = ctx.chat.id;
+  await ctx.replyWithHTML(await userLogout(login, chatId), notAuthKeyboard());
 });
 
 module.exports = { billingScene };

@@ -5,8 +5,17 @@ const { notAuthKeyboard } = require("./keyboards");
 const { checkAuth } = require("./controllers/authentification");
 const { authWizard } = require("./scenes/authScene");
 const { billingScene } = require("./scenes/billingScene");
+const { logging } = require("./helpers/logging");
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
+
+bot.use(async (ctx, next) => {
+  // console.log(ctx);
+  // const text = ctx.message.text;
+  // const chatId = ctx.message.chat.id;
+  // await logging("./log/allrequest.log", text, chatId);
+  return next();
+});
 
 const setupBot = () => {
   bot.use(new LocalSession({ database: "user_db.json" }).middleware());
@@ -41,6 +50,5 @@ process.once("SIGINT", () => bot.stop("SIGINT"));
 process.once("SIGTERM", () => bot.stop("SIGTERM"));
 
 module.exports = { setupBot };
-
 
 //git add . && git commit -m "add sql query" && git push
