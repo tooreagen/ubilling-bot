@@ -1,11 +1,24 @@
 const fs = require("fs").promises;
 const moment = require("moment");
 
-const logging = async (fileName, logString = "notext", chatId, login = "noauth") => {
+const logging = async (fileName, ctx, login = "noauth") => {
+  let text = "";
+  let chatId = "";
+
+  if (ctx?.update?.message?.text) {
+    text = ctx.update.message.text;
+    chatId = ctx.message.chat.id;
+  }
+
+  if (ctx?.callbackQuery?.data) {
+    text = ctx.callbackQuery.data;
+    chatId = ctx.callbackQuery.message.chat.id;
+  }
+
   try {
     const currentDate = moment().format("DD-MM-YYYY HH:mm:ss");
-    console.log(logString);
-    await fs.appendFile(fileName, `${currentDate} ${login} ${chatId} ${logString}\n`);
+    console.log(text);
+    await fs.appendFile(fileName, `${currentDate} ${login} ${chatId} ${text}\n`);
   } catch (err) {
     console.error(err);
   }
