@@ -10,10 +10,18 @@ const { logging } = require("./helpers/logging");
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 bot.use(async (ctx, next) => {
-  // console.log(ctx);
-  // const text = ctx.message.text;
-  // const chatId = ctx.message.chat.id;
-  // await logging("./log/allrequest.log", text, chatId);
+  if (ctx?.update?.message?.text) {
+    const text = ctx.update.message.text;
+    const chatId = ctx.message.chat.id;
+    await logging("./log/allrequest.log", text, chatId);
+  }
+
+  if (ctx?.callbackQuery?.data) {
+    const text = ctx.callbackQuery.data;
+    const chatId = ctx.callbackQuery.message.chat.id;
+    await logging("./log/allrequest.log", text, chatId);
+  }
+  
   return next();
 });
 

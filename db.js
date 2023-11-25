@@ -15,7 +15,7 @@ connectionUbilling.connect(function (err) {
     console.log("Error: " + err.message);
     return;
   } else {
-    console.log("Connecting to the Ubilling MySQL database");
+    console.log("Connecting to the Ubilling MySQL database: successful");
   }
 });
 

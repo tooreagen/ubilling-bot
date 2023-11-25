@@ -3,7 +3,11 @@
     {
       "id": "676900138:676900138",
       "data": {
-        "__scenes": {},
+        "__scenes": {
+          "current": "authentication",
+          "state": {},
+          "cursor": 1
+        },
         "name": "654654",
         "age": "66",
         "login": "vynny1ap64_h7n2",
