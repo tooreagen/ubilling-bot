@@ -78,9 +78,7 @@ const authWizard = new Scenes.WizardScene(
         console.error(err);
       }
 
-      ///////////// тут треба надати доступ в бот /////////////////
-
-      // return ctx.scene.leave();
+      //вхід в сцену білінга для авторизованого користувача
       return ctx.scene.enter("billingScene");
     } else {
       ctx.reply(

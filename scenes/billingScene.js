@@ -25,7 +25,7 @@ billingScene.hears("⬅️Назад", async (ctx) => {
 });
 
 //виклик фінансової клавіатури
-billingScene.hears("💲Фінансові операції", async (ctx) => {
+billingScene.hears("💸Фінансові операції", async (ctx) => {
   await ctx.reply("👇 Виконайте запит:", financeKeyboard());
 });
 
