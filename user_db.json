@@ -17,10 +17,7 @@
     {
       "id": "824411921:824411921",
       "data": {
-        "__scenes": {
-          "current": "billingScene",
-          "state": {}
-        },
+        "__scenes": {},
         "login": "vynny1ap64_h7n2",
         "isAuth": true
       }
@@ -42,7 +39,8 @@
           "current": "billingScene",
           "state": {}
         },
-        "login": "66956"
+        "login": "66956",
+        "isAuth": true
       }
     },
     {

@@ -54,6 +54,9 @@ const authWizard = new Scenes.WizardScene(
     if ((await checkPassword(ctx.session.login, ctx.message.text)) === true) {
       ctx.reply(`Дякую! Ви авторизовані.`);
 
+      //втсановлюємо статус авторизації в сесії
+      ctx.session.isAuth = true;
+
       //встановлення статусу авторизації в БД
       login = ctx.session.login;
       chatId = ctx.chat.id;

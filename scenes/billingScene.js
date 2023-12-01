@@ -4,8 +4,16 @@ const { getUserAllInfo } = require("../controllers/getUserAllInfo");
 const { getUserBalance } = require("../controllers/getUserBalance");
 const { getUserPays } = require("../controllers/getUserPays");
 const { userLogout } = require("../controllers/authentification");
+const { logging } = require("../helpers/logging");
 
 const billingScene = new Scenes.BaseScene("billingScene");
+
+//лог авторизованного користувача
+billingScene.use(async (ctx, next) => {
+  const login = ctx.session.login;
+  await logging("./log/allrequest.log", ctx, login);
+  return next();
+});
 
 billingScene.enter(async (ctx) => {
   //вхід в сцену
@@ -102,7 +110,9 @@ billingScene.hears("🤷‍♂️Хто я?", async (ctx) => {
 billingScene.hears("↩️Вихід", async (ctx) => {
   const login = ctx.session.login;
   const chatId = ctx.chat.id;
-  await ctx.replyWithHTML(await userLogout(login, chatId), notAuthKeyboard());
+  await ctx.replyWithHTML(await userLogout(login, chatId), notAuthKeyboard(), ctx.scene.leave());
+  ctx.session.login = "";
+  ctx.session.isAuth = false;
 });
 
 module.exports = { billingScene };

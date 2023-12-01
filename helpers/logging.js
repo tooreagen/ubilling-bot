@@ -18,7 +18,10 @@ const logging = async (fileName, ctx, login = "noauth") => {
   try {
     const currentDate = moment().format("DD-MM-YYYY HH:mm:ss");
     console.log(text);
-    await fs.appendFile(fileName, `${currentDate} ${login} ${chatId} ${text}\n`);
+    await fs.appendFile(
+      fileName,
+      `${currentDate} ${login.padEnd(20)} ${String(chatId).padEnd(15)} ${text}\n`
+    );
   } catch (err) {
     console.error(err);
   }
