@@ -1,5 +1,5 @@
 const { Scenes } = require("telegraf");
-const { mainKeyboard, financeKeyboard, techKeyboard, notAuthKeyboard } = require("../keyboards");
+const { mainKeyboard, financeKeyboard, techKeyboard, notAuthKeyboard, contactKeyboard } = require("../keyboards");
 const { getUserAllInfo } = require("../controllers/getUserAllInfo");
 const { getUserBalance } = require("../controllers/getUserBalance");
 const { getUserPays } = require("../controllers/getUserPays");
@@ -92,6 +92,18 @@ manager@itlux.if.ua\n
 Сб 9:00 до 16:00
 Нд Вихідний
 `);
+});
+
+//виклик клавіатури для зв'язку з оператором
+billingScene.hears("⌨️Зв'язок з нами", async (ctx) => {
+  await ctx.reply("👇 Виконайте запит:", contactKeyboard());
+});
+
+//Написати повідомлення оператору
+billingScene.hears("⌨️Написати повідомлення", async (ctx) => {
+  ctx.replyWithHTML(
+    `Виклик оператора...`
+  );
 });
 
 //скарга

@@ -58,8 +58,8 @@ const authWizard = new Scenes.WizardScene(
       ctx.session.isAuth = true;
 
       //встановлення статусу авторизації в БД
-      login = ctx.session.login;
-      chatId = ctx.chat.id;
+      const login = ctx.session.login;
+      const chatId = ctx.chat.id;
       const sqlQuery = `INSERT INTO tg_bot (login, chat_id, authorized) 
                         VALUES ('${login}', '${chatId}', 1)
                         ON DUPLICATE KEY UPDATE

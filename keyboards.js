@@ -9,7 +9,7 @@ const notAuthKeyboard = () => {
 const mainKeyboard = () => {
   return Markup.keyboard([
     ["💸Фінансові операції", "⚙️Технічні питання"],
-    ["📋Контакти провайдера", "🤬Подати скаргу"],
+    ["📋Контакти провайдера", "⌨️Зв'язок з нами"],
     ["🤷‍♂️Хто я?", "↩️Вихід"],
   ]).resize();
 };
@@ -24,6 +24,11 @@ const techKeyboard = () => {
   return Markup.keyboard([["🛠Виклик майстра"], ["⬅️Назад"]]).resize();
 };
 
+//клавіатура для зв'язку з оператором
+const contactKeyboard = () => {
+  return Markup.keyboard([["⌨️Написати повідомлення", "🤬Подати скаргу"], ["⬅️Назад"]]).resize();
+};
+
 //клавіатура запитання да, ні
 const yesNoKeyboard = () => {
   return Markup.inlineKeyboard(
@@ -31,4 +36,11 @@ const yesNoKeyboard = () => {
     { columns: 2 }
   );
 };
-module.exports = { mainKeyboard, yesNoKeyboard, notAuthKeyboard, financeKeyboard, techKeyboard };
+module.exports = {
+  mainKeyboard,
+  yesNoKeyboard,
+  notAuthKeyboard,
+  financeKeyboard,
+  techKeyboard,
+  contactKeyboard,
+};

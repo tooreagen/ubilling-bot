@@ -11,6 +11,7 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 
 bot.use(new LocalSession({ database: "user_db.json" }).middleware());
 
+//логування користувачів які не авторизовані
 bot.use(async (ctx, next) => {
   if (!ctx.session.isAuth) {
     await logging("./log/allrequest.log", ctx);
