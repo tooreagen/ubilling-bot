@@ -49,8 +49,6 @@ bot.start(async (ctx) => {
 
 exports.sendMessage = sendMessage;
 
-bot.use(require("./composers/telegramToWeb.composer"));
-
 bot.launch();
 
 // Enable graceful stop
