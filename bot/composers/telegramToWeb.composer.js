@@ -8,7 +8,8 @@ const composer = new telegraf.Composer();
 composer.on(filters.message("text"), async (ctx, next) => {
   const login = ctx.session.login;
   const message = ctx.message.text;
-  io.send(login, message);
+  const chat_id = ctx.update.message.chat.id;
+  io.send(chat_id, login, message);
   next();
 });
 

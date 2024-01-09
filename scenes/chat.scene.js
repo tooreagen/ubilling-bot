@@ -1,6 +1,7 @@
 const { Scenes } = require("telegraf");
 
 const { logging } = require("../helpers/logging");
+const { mainKeyboard } = require("../keyboards");
 
 const chatScene = new Scenes.BaseScene("chatScene");
 
@@ -11,16 +12,14 @@ chatScene.use(async (ctx, next) => {
   return next();
 });
 
-//код виконується при вході в сцену
-chatScene.enter(async (ctx) => {});
+chatScene.hears("❌Завершити чат❌", async (ctx) => {
+  await ctx.replyWithHTML(`Чат завершено`, mainKeyboard());
+  return ctx.scene.enter("billingScene");
+});
 
-//Завершення чату
-// chatScene.hears("↩️Вихід", async (ctx) => {
-//   const login = ctx.session.login;
-//   const chatId = ctx.chat.id;
-//   await ctx.replyWithHTML(await userLogout(login, chatId), notAuthKeyboard(), ctx.scene.leave());
-//   ctx.session.login = "";
-//   ctx.session.isAuth = false;
-// });
+//код виконується при вході в сцену
+chatScene.enter(async (ctx) => {
+  console.log("Створити сокет, передати ID того хто створив сцену");
+});
 
 module.exports = { chatScene };

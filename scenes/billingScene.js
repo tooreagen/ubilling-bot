@@ -5,6 +5,7 @@ const {
   techKeyboard,
   notAuthKeyboard,
   contactKeyboard,
+  chatKeyboard,
 } = require("../keyboards");
 const { getUserAllInfo } = require("../controllers/getUserAllInfo");
 const { getUserBalance } = require("../controllers/getUserBalance");
@@ -107,7 +108,8 @@ billingScene.hears("⌨️Зв'язок з нами", async (ctx) => {
 
 //Написати повідомлення оператору
 billingScene.hears("⌨️Написати повідомлення", async (ctx) => {
-  ctx.replyWithHTML(`Виклик оператора...`);
+  await ctx.replyWithHTML(`Виклик оператора...`, chatKeyboard());
+  return ctx.scene.enter("chatScene");
 });
 
 //скарга

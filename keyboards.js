@@ -29,6 +29,11 @@ const contactKeyboard = () => {
   return Markup.keyboard([["⌨️Написати повідомлення", "🤬Подати скаргу"], ["⬅️Назад"]]).resize();
 };
 
+//клавіатура під час чату з оператором
+const chatKeyboard = () => {
+  return Markup.keyboard(["❌Завершити чат❌"]).resize();
+};
+
 //клавіатура запитання да, ні
 const yesNoKeyboard = () => {
   return Markup.inlineKeyboard(
@@ -43,4 +48,5 @@ module.exports = {
   financeKeyboard,
   techKeyboard,
   contactKeyboard,
+  chatKeyboard,
 };

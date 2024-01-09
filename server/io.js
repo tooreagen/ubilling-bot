@@ -5,8 +5,8 @@ require("dotenv").config();
 let io;
 
 //send message from telegram to web
-const send = (login, message) => {
-  io.emit("new_msg", { name: login, body: message });
+const send = (chat_id, login, message) => {
+  io.emit("new_msg", { chat_id: chat_id, name: login, body: message });
 };
 
 function init(express) {
@@ -14,13 +14,14 @@ function init(express) {
   io.on("connection", (socket) => {
     console.log("a user connected");
 
-    //receiving a message from the browser
+    //receiving a message from web to telegram
     socket.on("send_msg", (msg) => {
-      bot.sendMessage(process.env.TG_USER_ID, msg.name + ": " + msg.body);
+      bot.sendMessage(msg.chat_id, "Повідомлення від " + msg.name + ": " + msg.body);
       //update browser chat
       socket.emit("new_msg", {
         name: msg.name,
         body: msg.body,
+        chat_id: msg.chat_id,
       });
     });
 
