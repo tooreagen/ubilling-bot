@@ -6,7 +6,7 @@ const composer = new telegraf.Composer();
 
 //sending a message from Telegram to a browser
 composer.on(filters.message("text"), async (ctx, next) => {
-  const login = "Barbos Ivanovich";
+  const login = ctx.session.login;
   const message = ctx.message.text;
   io.send(login, message);
   next();
