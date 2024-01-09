@@ -1,5 +1,11 @@
 const { Scenes } = require("telegraf");
-const { mainKeyboard, financeKeyboard, techKeyboard, notAuthKeyboard, contactKeyboard } = require("../keyboards");
+const {
+  mainKeyboard,
+  financeKeyboard,
+  techKeyboard,
+  notAuthKeyboard,
+  contactKeyboard,
+} = require("../keyboards");
 const { getUserAllInfo } = require("../controllers/getUserAllInfo");
 const { getUserBalance } = require("../controllers/getUserBalance");
 const { getUserPays } = require("../controllers/getUserPays");
@@ -101,9 +107,7 @@ billingScene.hears("⌨️Зв'язок з нами", async (ctx) => {
 
 //Написати повідомлення оператору
 billingScene.hears("⌨️Написати повідомлення", async (ctx) => {
-  ctx.replyWithHTML(
-    `Виклик оператора...`
-  );
+  ctx.replyWithHTML(`Виклик оператора...`);
 });
 
 //скарга

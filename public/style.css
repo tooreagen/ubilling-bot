@@ -1,0 +1,77 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.wrapper .chat {
+  padding: 10px;
+  list-style: none;
+  height: 100%;
+}
+
+.wrapper .chat li {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: aquamarine;
+  animation: showLi 0.3s ease;
+}
+
+@keyframes showLi {
+  from {
+    opacity: 0;
+    transform: rotateX(90deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotateX(0);
+  }
+}
+
+.wrapper .chat li .name {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.wrapper .form {
+  display: flex;
+  gap: 10px;
+  height: 50px;
+  padding: 5px;
+}
+
+.wrapper .form input {
+  width: 100%;
+  padding-left: 10px;
+  border-radius: 10px;
+  outline: none;
+}
+
+.wrapper .form .send {
+  border: none;
+  outline: none;
+  padding: 3px 10px;
+  background-color: brown;
+  color: white;
+  font-weight: 500;
+  border-radius: 10px;
+  transition: 0.3s ease;
+}
+
+.wrapper .form .send:hover {
+  background-color: rgb(197, 75, 75);
+}
