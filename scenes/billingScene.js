@@ -12,6 +12,7 @@ const { getUserBalance } = require("../controllers/getUserBalance");
 const { getUserPays } = require("../controllers/getUserPays");
 const { userLogout } = require("../controllers/authentification");
 const { logging } = require("../helpers/logging");
+const { userCredit } = require("../controllers/userCredit");
 
 const billingScene = new Scenes.BaseScene("billingScene");
 
@@ -25,7 +26,7 @@ billingScene.use(async (ctx, next) => {
 billingScene.enter(async (ctx) => {
   //вхід в сцену
   //Відображення користувачу його поточного стану
-  await ctx.replyWithHTML("Вітаємо в боті <b>MEGABOT</b>\n\n" + "Ви авторизовані!");
+  await ctx.replyWithHTML("Вітаємо в боті <b>ITLUX BOT</b>\n\n" + "Ви авторизовані!");
 
   await ctx.replyWithHTML(await getUserAllInfo(ctx.session.login));
 
@@ -52,22 +53,13 @@ billingScene.hears("⚙️Технічні питання", async (ctx) => {
 //відображення балансу
 billingScene.hears("💰Баланс", async (ctx) => {
   const login = ctx.session.login;
-  ctx.replyWithHTML(`Ваш баланс: <b>${await getUserBalance(login)} грн.</b>`);
+  await ctx.replyWithHTML(`Ваш баланс: <b>${await getUserBalance(login)} грн.</b>`);
 });
 
 //відображення останніх 10 платежів
 billingScene.hears("📈Останні платежі", async (ctx) => {
   const login = ctx.session.login;
-  const pays = await getUserPays(login);
-  let paysMarkup = "";
-
-  for (let i = 0; i < Math.min(10, pays.length); i++) {
-    if (pays[i].date) {
-      const date = new Date(pays[i].date);
-      const formattedDate = date.toLocaleString("uk-UA", { timeZone: "Europe/Kiev" });
-      paysMarkup += `Дата: <i>${formattedDate}</i>\nСума: <b>${pays[i].summ} грн.</b>\n\n`;
-    }
-  }
+  const paysMarkup = await getUserPays(login);
 
   ctx.replyWithHTML(`<b>Останні 10 платежів:</b>\n\n${paysMarkup}`);
 });
@@ -75,7 +67,8 @@ billingScene.hears("📈Останні платежі", async (ctx) => {
 //взяти кредит
 billingScene.hears("🤑Кредит", async (ctx) => {
   const login = ctx.session.login;
-  ctx.replyWithHTML(`Ви не можете взяти кредит.`);
+  const response = await userCredit(login);
+  ctx.replyWithHTML(response);
 });
 
 //Виклик майстра
@@ -93,6 +86,8 @@ billingScene.hears("📋Контакти провайдера", async (ctx) => {
 (093) 565-44-48\n
 <b>📧 ЕЛЕКТРОННА ПОШТА:</b>
 manager@itlux.if.ua\n
+<b>📧 ЧАТ З НАМИ:</b>
+https://t.me/ITlux_manager\n
 <b>🕗 ГРАФІК РОБОТИ</b>:
 Пн-Чт з 8:30 до 18:00
 Пт з 8:30 до 17:00
@@ -116,6 +111,13 @@ billingScene.hears("⌨️Написати повідомлення", async (ctx
 billingScene.hears("🤬Подати скаргу", async (ctx) => {
   ctx.replyWithHTML(
     `Ви там собі не видумуйте, все у вас добре і скаржитись вам ні на шо. Хай щастить!`
+  );
+});
+
+//пропизиція від абонента на розширення функціоналу
+billingScene.hears("💡Пропозиції щодо бота", async (ctx) => {
+  ctx.replyWithHTML(
+    `Якщо Вам не вистачає функціоналу бота, напишіть нам: <a href="https://t.me/ITlux_manager">Написати</a>`
   );
 });
 

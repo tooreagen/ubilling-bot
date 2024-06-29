@@ -22,10 +22,20 @@ const getUserPays = async (login) => {
     });
 
     if (resultPays.length !== 0) {
-      return resultPays;
+      let paysMarkup = "";
+
+      for (let i = 0; i < Math.min(10, resultPays.length); i++) {
+        if (resultPays[i].date) {
+          const date = new Date(resultPays[i].date);
+          const formattedDate = date.toLocaleString("uk-UA", { timeZone: "Europe/Kiev" });
+          paysMarkup += `Дата: <i>${formattedDate}</i>\nСума: <b>${resultPays[i].summ} грн.</b>\n\n`;
+        }
+      }
+
+      return paysMarkup;
     }
 
-    return "NoPays";
+    return "Платежі відсутні...";
   } catch (err) {
     console.error(err);
   }
