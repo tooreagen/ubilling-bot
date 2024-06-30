@@ -8,6 +8,8 @@ const { billingScene } = require("../scenes/billingScene");
 const { chatScene } = require("../scenes/chat.scene");
 require("dotenv").config();
 
+const { BOT_NAME } = process.env;
+
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 bot.use(new LocalSession({ database: "user_db.json" }).middleware());
@@ -17,7 +19,7 @@ function sendMessage(userId, message, markup) {
   bot.telegram.sendMessage(userId, message, markup);
 }
 
-//logging of users who are not authorized
+//логування неавторизованих користувачів
 bot.use(async (ctx, next) => {
   if (!ctx.session.isAuth) {
     await logging("./log/allrequest.log", ctx);
@@ -25,17 +27,17 @@ bot.use(async (ctx, next) => {
   return next();
 });
 
-// Registration of scenes in the bot
+// Реєстрація сцен у боті
 const stage = new Scenes.Stage([authWizard, billingScene, chatScene]);
 bot.use(stage.middleware());
 
-//bot start, authorization
+//запуск бота, авторизація
 bot.start(async (ctx) => {
-  //at the start, we check whether the user is authorized in the database
+  //на початку перевіряємо, чи користувач авторизований в базі даних
   if (!(await checkAuth(ctx.update.message.chat.id)) === true) {
-    //if not authorized
+    //якщо не авторизований
     await ctx.replyWithHTML(
-      "Вітаємо в боті <b>MEGABOT</b>\n\n" + "Авторизуйтесь будь ласка",
+      `Вітаємо в боті <b>${BOT_NAME}</b>\n\n` + `Авторизуйтесь будь ласка`,
       notAuthKeyboard()
     );
 

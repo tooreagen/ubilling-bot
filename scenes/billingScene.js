@@ -1,3 +1,4 @@
+require("dotenv").config();
 const { Scenes } = require("telegraf");
 const {
   mainKeyboard,
@@ -14,6 +15,8 @@ const { userLogout } = require("../controllers/authentification");
 const { logging } = require("../helpers/logging");
 const { userCredit } = require("../controllers/userCredit");
 
+const { BOT_NAME } = process.env;
+
 const billingScene = new Scenes.BaseScene("billingScene");
 
 //лог авторизованного користувача
@@ -26,7 +29,7 @@ billingScene.use(async (ctx, next) => {
 billingScene.enter(async (ctx) => {
   //вхід в сцену
   //Відображення користувачу його поточного стану
-  await ctx.replyWithHTML("Вітаємо в боті <b>ITLUX BOT</b>\n\n" + "Ви авторизовані!");
+  await ctx.replyWithHTML(`Вітаємо в боті <b>${BOT_NAME}</b>\n\n` + `Ви авторизовані!`);
 
   await ctx.replyWithHTML(await getUserAllInfo(ctx.session.login));
 
@@ -78,7 +81,8 @@ billingScene.hears("🛠Виклик майстра", async (ctx) => {
 
 //відображення контактів
 billingScene.hears("📋Контакти провайдера", async (ctx) => {
-  ctx.replyWithHTML(`<b>🏢 НАША АДРЕСА:</b>
+  ctx.replyWithHTML(
+    `<b>🏢 НАША АДРЕСА:</b>
 м. Калуш, вул. Б.Хмельницького, 14\n
 <b>📱 ТЕЛЕФОНИ:</b>
 (099) 565-44-48
@@ -93,7 +97,9 @@ https://t.me/ITlux_manager\n
 Пт з 8:30 до 17:00
 Сб 9:00 до 16:00
 Нд Вихідний
-`);
+`,
+    { disable_web_page_preview: true }
+  );
 });
 
 //виклик клавіатури для зв'язку з оператором
